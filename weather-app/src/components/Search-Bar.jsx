@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react"
 import { FormControl, Button, InputGroup, Container, Form } from "react-bootstrap"
 import { connect } from "react-redux";
-import { fetchResultsAction, addToFavAction, removeFromFavAction, setSearchQuery } from "../redux/actions/index"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { fetchResultsAction, addToFavAction, removeFromFavAction, setSearchQuery, clearSearchResult } from "../redux/actions/index"
 
 
 const mapStateToProps = (state) => ({
@@ -18,7 +20,8 @@ const mapStateToProps = (state) => ({
     fetchResultsAction: (query, searchType) => dispatch(fetchResultsAction(query, searchType)),
     addToFavList: (query) => dispatch(addToFavAction(query)),
     removeFromFavList: (query) => dispatch(removeFromFavAction(query)),
-    setSearchQuery: (query) => dispatch(setSearchQuery(query))
+    setSearchQuery: (query) => dispatch(setSearchQuery(query)),
+    clearSearch: (query) => dispatch(clearSearchResult(query))
   });
 
 const SearchBar = ({
@@ -32,6 +35,7 @@ const SearchBar = ({
     addToFavList,
     removeFromFavList,
     setSearchQuery,
+    clearSearch,
 }) => {
 
     const [search, setSearch] = useState("");
@@ -42,10 +46,15 @@ const SearchBar = ({
         setSearch(e.target.value);
       }
 
-    const handleSubmit= (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         fetchResultsAction(search, "search")
       }
+
+      // const clearSearchQuery = (e) => {
+
+      //   clearSearch(" ")
+      // }
 
       useEffect(() => {
         setSearchQuery(search)
@@ -65,6 +74,9 @@ const SearchBar = ({
                     value={search}
                     onChange={handleChange}
                     />
+                    <Button variant="outline-secondary border-gray" id="button-addon2" onClick={() => clearSearch(" ")}>
+                    <FontAwesomeIcon icon={faTimes}/>
+                    </Button>
                     <Button variant="outline-secondary" id="button-addon2" type="submit" >
                     Search
                     </Button>

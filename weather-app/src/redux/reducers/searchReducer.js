@@ -29,6 +29,12 @@
           ...state,
           loading: action.payload,
         };
+      case "CLEAR_SEARCH":
+        return {
+          ...state,
+          searchQuery: action.payload,
+          searchResults: {},
+        };
       default:
         return state;
     }

@@ -15,7 +15,7 @@ const favouritesReducer = (state = initialState.favourites, action) => {
         ...state,
         locations: 
           state.locations.filter(
-            (l) => l._id !== action.payload._id 
+            (l) => l.Current.name !== action.payload.Current.name
           )
         // Replacing state as an Array from filter
       }

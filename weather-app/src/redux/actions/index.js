@@ -38,7 +38,7 @@ export const fetchResultsAction = (query, searchType) => {
           const LocationData = {
             "fiveDay": fetched5day,
             "Current": fetchedCurrent
-          }
+          } 
 
 
 
@@ -127,5 +127,10 @@ export const fetchResultsAction = (query, searchType) => {
 
   export const setSearchQuery = (query) => ({
     type: 'QUERY',
+    payload: query,
+  })
+
+  export const clearSearchResult = (query) => ({
+    type: 'CLEAR_SEARCH',
     payload: query,
   })
